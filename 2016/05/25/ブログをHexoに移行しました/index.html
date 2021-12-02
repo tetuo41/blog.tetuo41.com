@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ブログをHexoに移行しました | Stay Rad</title>
+  <meta name="author" content="Hiroki Hatsushika">
+  
+  <meta name="description" content="WordpressからHexoに移行した話
+理由
+多機能だが全然使いこなせない
+gitで全てを管理できない
+
+上記が主な理由なのだが、何を隠そう元々４エントリーしかなかったので心機一転環境を変えてモチベーションを上げようというのが狙い。。
+移行先の選定下記のサイトを参考に選定しました
+
+Static">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ブログをHexoに移行しました"/>
+  <meta property="og:site_name" content="Stay Rad"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="atom.xml" title="Stay Rad" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-40597557-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Stay Rad</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/AboutMe">AboutMe</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-05-25T02:06:46.000Z"><a href="/2016/05/25/ブログをHexoに移行しました/">2016-05-25</a></time>
+      
+      
+  
+    <h1 class="title">ブログをHexoに移行しました</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>WordpressからHexoに移行した話</p>
+<h3 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h3><ul>
+<li>多機能だが全然使いこなせない</li>
+<li>gitで全てを管理できない</li>
+</ul>
+<p>上記が主な理由なのだが、何を隠そう元々４エントリーしかなかったので<br>心機一転環境を変えてモチベーションを上げようというのが狙い。。</p>
+<h3 id="移行先の選定"><a href="#移行先の選定" class="headerlink" title="移行先の選定"></a>移行先の選定</h3><p>下記のサイトを参考に選定しました</p>
+<ul>
+<li><a href="https://staticsitegenerators.net/" target="_blank" rel="noopener">Static Site Generators</a></li>
+<li><a href="https://www.staticgen.com/" target="_blank" rel="noopener">StaticGen</a></li>
+</ul>
+<p>最終的に<a href="http://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>と<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>で迷い、<br>Node.jsの勉強になるかと思い「Hexo」を選びました。</p>
+<h3 id="セットアップ"><a href="#セットアップ" class="headerlink" title="セットアップ"></a>セットアップ</h3><p>公式サイトを参考にインストール(node,npmはインストールは省き)</p>
+<h4 id="Hexo-インストール"><a href="#Hexo-インストール" class="headerlink" title="Hexo インストール"></a>Hexo インストール</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init weblog</span><br><span class="line">$ cd weblog</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>Hello Worldの記事が表示されます<br>すごい簡単</p>
+<h4 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h4><p>サーバはGitHubPagesを利用しようと思ったので、<br>GitHubにレポジトリを用意</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd weblog</span><br><span class="line">$ git init</span><br><span class="line">$ git remote add origin git@github.com:tetuo41&#x2F;weblog.git</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m &quot;first commit&quot;</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<p>今回は何も考えずmasterブランチで管理しようと思う</p>
+<h4 id="Wordpressの記事を移行"><a href="#Wordpressの記事を移行" class="headerlink" title="Wordpressの記事を移行"></a>Wordpressの記事を移行</h4><p>Wordpressから、記事のxmlをエクスポートしHexoに取り込む<br>取り込む際には「<a href="https://github.com/hexojs/hexo-migrator-wordpress" target="_blank" rel="noopener">hexo-migrator-wordpress</a>」プラグインを利用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd weblog</span><br><span class="line">$ npm install hexo-migrator-wordpress --save</span><br><span class="line">$ hexo migrate wordpress &lt;source&gt;</span><br></pre></td></tr></table></figure>
+
+<p>取り込むと<code>source/_post/</code>配下に記事が作成される<br>画像などは修正する必要があるので各々修正</p>
+<p>私は画像は<code>post_asset_folder</code>を利用せず、<code>&lt;img&gt;</code>タグで運用することにしました。<br><code>post_asset_folder: true</code>にすると記事ごとにフォルダが作成されそこに画像データを入れると<br>記事内で<code></code>タグで便利になるっぽいですが、私はそんなに画像を使わないだろうと判断し<br><code>source/img/</code>フォルダを作成し、そこを参照するように変更</p>
+<h1 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h1><p>準備ができたので、Deploy作業設定ファイル<code>_config.yml</code>を色々変更</p>
+<p>サイトの基本情報系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Stay Rad</span><br><span class="line">subtitle:</span><br><span class="line">description:</span><br><span class="line">author: Hiroki Hatsushika</span><br><span class="line">language: ja</span><br><span class="line">timezone: Asia&#x2F;Tokyo</span><br></pre></td></tr></table></figure>
+
+<p>テーマ（<a href="https://github.com/hexojs/hexo-theme-light" target="_blank" rel="noopener">light</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: light</span><br></pre></td></tr></table></figure>
+
+<p>Deployment</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:tetuo41&#x2F;weblog.git</span><br><span class="line">  branch: gh-pages</span><br><span class="line">  message: hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>私はGitHub Pagesを利用しようと思うので<br>別途<code>https://github.com/hexojs/hexo-deployer-git</code>プラグインを入れとく</p>
+<p>設定変更が終わったらいよいよDeploy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>GitHub Pageが表示される</p>
+<p>私は独自のドメインを利用したので<code>CNAME</code>を設置して完了</p>
+<h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>非常にメンテナンスしやすくなった。<br>MySQLサーバも必要ないし、GitHub Pageも利用できるしGitで管理もできるようになった、<br>画像の運用に関しては色々検討したいが、取り敢えずPluginを漁ってみようと思う。<br>ゆくゆくはPluginも作りたいｗ</p>
+<p><a href="http://qiita.com/f_prg/items/4ef2a29f78be56575ec8" target="_blank" rel="noopener">HexoにWordPressの記事をマイグレートする</a><br><a href="http://harasou.github.io/2015/04/28/hexo-%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%83%A1%E3%83%A2/" target="_blank" rel="noopener">hexo-セットアップメモ</a><br><a href="http://dev.shikakun.com/post/hexo-init/" target="_blank" rel="noopener">Hexo でブログをつくるまで</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Try/">Try</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Hexo/">Hexo</a>, <a href="/tags/wordpress/">wordpress</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Memo/">Memo</a><small>7</small></li>
+  
+    <li><a href="/categories/Try/">Try</a><small>2</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Firebase/">Firebase</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/JAWSDAYS2015/">JAWSDAYS2015</a><small>1</small></li>
+  
+    <li><a href="/tags/MIME/">MIME</a><small>1</small></li>
+  
+    <li><a href="/tags/Memo/">Memo</a><small>1</small></li>
+  
+    <li><a href="/tags/emberjs/">emberjs</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/remotework/">remotework</a><small>1</small></li>
+  
+    <li><a href="/tags/ruby/">ruby</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/Firebase/" style="font-size: 10px;">Firebase</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JAWSDAYS2015/" style="font-size: 10px;">JAWSDAYS2015</a> <a href="/tags/MIME/" style="font-size: 10px;">MIME</a> <a href="/tags/Memo/" style="font-size: 10px;">Memo</a> <a href="/tags/emberjs/" style="font-size: 15px;">emberjs</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/remotework/" style="font-size: 10px;">remotework</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 Hiroki Hatsushika
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'stayrad';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

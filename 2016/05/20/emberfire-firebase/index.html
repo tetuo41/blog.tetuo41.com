@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>FireBase試し (EmberFire) | Stay Rad</title>
+  <meta name="author" content="Hiroki Hatsushika">
+  
+  <meta name="description" content="Google i/oでFirebaseが気になったので試しにどんなものかさわってみたhttps://events.google.com/io2016/
+■ 環境node v4.4.4npm v2.15.1bower v1.7.9
+ember v2.5.1ember-cli v2.5.0emberFi">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="FireBase試し (EmberFire)"/>
+  <meta property="og:site_name" content="Stay Rad"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="atom.xml" title="Stay Rad" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-40597557-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Stay Rad</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/AboutMe">AboutMe</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-05-19T17:05:20.000Z"><a href="/2016/05/20/emberfire-firebase/">2016-05-20</a></time>
+      
+      
+  
+    <h1 class="title">FireBase試し (EmberFire)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Google i/oでFirebaseが気になったので試しにどんなものかさわってみた<br><a href="https://events.google.com/io2016/" target="_blank" rel="noopener">https://events.google.com/io2016/</a></p>
+<h2 id="■-環境"><a href="#■-環境" class="headerlink" title="■ 環境"></a>■ 環境</h2><p>node v4.4.4<br>npm v2.15.1<br>bower v1.7.9</p>
+<p>ember v2.5.1<br>ember-cli v2.5.0<br>emberFire v1.6.6</p>
+<h3 id="EmberFireのTutorialを参考に試してみる"><a href="#EmberFireのTutorialを参考に試してみる" class="headerlink" title="EmberFireのTutorialを参考に試してみる"></a>EmberFireのTutorialを参考に試してみる</h3><p><a href="https://www.firebase.com/docs/web/libraries/ember/" target="_blank" rel="noopener">https://www.firebase.com/docs/web/libraries/ember/</a></p>
+<h3 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h3><p><a href="https://www.firebase.com/docs/web/libraries/ember/guide.html" target="_blank" rel="noopener">https://www.firebase.com/docs/web/libraries/ember/guide.html</a></p>
+<h2 id="■-準備"><a href="#■-準備" class="headerlink" title="■ 準備"></a>■ 準備</h2><h3 id="FireBase-ConsoleでApp作成"><a href="#FireBase-ConsoleでApp作成" class="headerlink" title="FireBase ConsoleでApp作成"></a>FireBase ConsoleでApp作成</h3><img src="/img/p1.png" width="300" height="141">
+
+<h2 id="■-作成"><a href="#■-作成" class="headerlink" title="■ 作成"></a>■ 作成</h2><h3 id="Ember-App-作成"><a href="#Ember-App-作成" class="headerlink" title="Ember App 作成"></a>Ember App 作成</h3><h4 id="ember-cliを利用してAppを作成"><a href="#ember-cliを利用してAppを作成" class="headerlink" title="ember-cliを利用してAppを作成"></a>ember-cliを利用してAppを作成</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember new emberFire-study</span><br></pre></td></tr></table></figure>
+
+<h3 id="emberFireインストール"><a href="#emberFireインストール" class="headerlink" title="emberFireインストール"></a>emberFireインストール</h3><h4 id="こちらもember-cliを使用してemberFireをインストール"><a href="#こちらもember-cliを使用してemberFireをインストール" class="headerlink" title="こちらもember-cliを使用してemberFireをインストール"></a>こちらもember-cliを使用してemberFireをインストール</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember install emberfire</span><br></pre></td></tr></table></figure>
+
+<p>インストールすると「bower.json」と「app/adapters/application.js」に<br>emberFireが追記されていることがわかる</p>
+<h3 id="emberFire設定"><a href="#emberFire設定" class="headerlink" title="emberFire設定"></a>emberFire設定</h3><ul>
+<li>「config/environment.js」内の先ほど作成したfirebaseのURLを設定する</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firebase:&#39;https:&#x2F;&#x2F;YOUR-FIREBASE-APP.firebaseio.com&#x2F;&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="データ作成用にモデル作成"><a href="#データ作成用にモデル作成" class="headerlink" title="データ作成用にモデル作成"></a>データ作成用にモデル作成</h3><p>ember-cliでモデルを作成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember generate model post title:string body:string timestamp:number</span><br></pre></td></tr></table></figure>
+
+<p>app/models/post.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> DS.Model.extend(&#123;</span><br><span class="line">  title: DS.attr(<span class="string">'string'</span>),</span><br><span class="line">  body: DS.attr(<span class="string">'string'</span>),</span><br><span class="line">  timestamp: DS.attr(<span class="string">'number'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="データ作成用にテンプレート作成"><a href="#データ作成用にテンプレート作成" class="headerlink" title="データ作成用にテンプレート作成"></a>データ作成用にテンプレート作成</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember generate template posts</span><br></pre></td></tr></table></figure>
+
+<h3 id="データ投入処理追加"><a href="#データ投入処理追加" class="headerlink" title="データ投入処理追加"></a>データ投入処理追加</h3><ul>
+<li>template</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>New Post<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"post-publish"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    &#123;&#123;input value=title placeholder="Title"&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    &#123;&#123;textarea value=body placeholder="Body"&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> &#123;&#123;<span class="attr">action</span> "<span class="attr">publishPost</span>"&#125;&#125;&gt;</span>Publish<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>controller</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember generate controller posts</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Ember <span class="keyword">from</span> <span class="string">'ember'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// app/controllers/posts.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Ember.Controller.extend(&#123;</span><br><span class="line">  sortProperties: [<span class="string">'timestamp'</span>],</span><br><span class="line">  sortAscending: <span class="literal">false</span>, <span class="comment">// sorts post by timestamp</span></span><br><span class="line">  actions: &#123;</span><br><span class="line">    publishPost: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> newPost = <span class="keyword">this</span>.store.createRecord(<span class="string">'post'</span>, &#123;</span><br><span class="line">        title: <span class="keyword">this</span>.get(<span class="string">'title'</span>),</span><br><span class="line">        body: <span class="keyword">this</span>.get(<span class="string">'body'</span>),</span><br><span class="line">        timestamp: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">      &#125;);</span><br><span class="line">      newPost.save();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="サーバを立ち上げ動作確認"><a href="#サーバを立ち上げ動作確認" class="headerlink" title="サーバを立ち上げ動作確認"></a>サーバを立ち上げ動作確認</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember s</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://localhost:4200/" target="_blank" rel="noopener">http://localhost:4200/</a></p>
+<img src="/img/p2.png" width="300" height="186">
+
+<p><a href="http://localhost:4200/posts" target="_blank" rel="noopener">http://localhost:4200/posts</a></p>
+<img src="/img/p3.png" width="300" height="141">
+
+<p>「Publis」ボタンを押してblogを投稿</p>
+<h3 id="FireBase-Console画面にて確認"><a href="#FireBase-Console画面にて確認" class="headerlink" title="FireBase Console画面にて確認"></a>FireBase Console画面にて確認</h3><img src="/img/p4.png" width="300" height="124">
+
+<p>無事登録されていることを確認</p>
+<h3 id="データ一覧を参照する処理を追記"><a href="#データ一覧を参照する処理を追記" class="headerlink" title="データ一覧を参照する処理を追記"></a>データ一覧を参照する処理を追記</h3><ul>
+<li>route</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember generate route posts</span><br></pre></td></tr></table></figure>
+
+<p>途中でTemplesを上書きするか聞いてくるので取り敢えず「No」！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Ember.Route.extend(&#123;</span><br><span class="line">  model: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.store.findAll(<span class="string">'post'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>先ほどのtemplesに下記を追記</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">&#123;&#123;#each model as |post|&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;post.title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;post.body&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;&#123;/each&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="サーバを立ち上げ動作確認-1"><a href="#サーバを立ち上げ動作確認-1" class="headerlink" title="サーバを立ち上げ動作確認"></a>サーバを立ち上げ動作確認</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ember s</span><br></pre></td></tr></table></figure>
+<p><a href="http://localhost:4200/posts" target="_blank" rel="noopener">http://localhost:4200/posts</a></p>
+<img src="/img/p5.png" width="245" height="300">
+
+<p>上記の通り登録したものが表示されればOK。<br>他にもコメントなどのリレーションのコードもあるが割愛ｗ</p>
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p><a href="https://github.com/tetuo41/emberFire-study" target="_blank" rel="noopener">github</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Try/">Try</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/emberjs/">emberjs</a>, <a href="/tags/Firebase/">Firebase</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Memo/">Memo</a><small>7</small></li>
+  
+    <li><a href="/categories/Try/">Try</a><small>2</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Firebase/">Firebase</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/JAWSDAYS2015/">JAWSDAYS2015</a><small>1</small></li>
+  
+    <li><a href="/tags/MIME/">MIME</a><small>1</small></li>
+  
+    <li><a href="/tags/Memo/">Memo</a><small>1</small></li>
+  
+    <li><a href="/tags/emberjs/">emberjs</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/remotework/">remotework</a><small>1</small></li>
+  
+    <li><a href="/tags/ruby/">ruby</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/Firebase/" style="font-size: 10px;">Firebase</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JAWSDAYS2015/" style="font-size: 10px;">JAWSDAYS2015</a> <a href="/tags/MIME/" style="font-size: 10px;">MIME</a> <a href="/tags/Memo/" style="font-size: 10px;">Memo</a> <a href="/tags/emberjs/" style="font-size: 15px;">emberjs</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/remotework/" style="font-size: 10px;">remotework</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 Hiroki Hatsushika
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'stayrad';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

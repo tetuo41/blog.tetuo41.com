@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Emberで他のApiサーバを使うとき | Stay Rad</title>
+  <meta name="author" content="Hiroki Hatsushika">
+  
+  <meta name="description" content="概要ローカルで開発してデータだけApiサーバから取得したいとき、server/配下をどうにかすると便利な話。
+DSのRESTAdapterにHostを設定しても良いのだが、開発だけ向き先を別ドメインに変えたい時などにしたい場合はhttp-proxyを使用する。
+http-proxy
+作成proxyフ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Emberで他のApiサーバを使うとき"/>
+  <meta property="og:site_name" content="Stay Rad"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="atom.xml" title="Stay Rad" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-40597557-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Stay Rad</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/AboutMe">AboutMe</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="public">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-05-30T02:03:36.000Z"><a href="/2016/05/30/Emberで他のApiサーバを使うとき/">2016-05-30</a></time>
+      
+      
+  
+    <h1 class="title">Emberで他のApiサーバを使うとき</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h1><p>ローカルで開発してデータだけApiサーバから取得したいとき、<br><code>server/</code>配下をどうにかすると便利な話。</p>
+<p><code>DS</code>の<code>RESTAdapter</code>にHostを設定しても良いのだが、<br>開発だけ向き先を別ドメインに変えたい時などにしたい場合は<code>http-proxy</code>を使用する。</p>
+<p><a href="https://www.npmjs.com/package/http-proxy" target="_blank" rel="noopener">http-proxy</a></p>
+<h1 id="作成"><a href="#作成" class="headerlink" title="作成"></a>作成</h1><p>proxyファイルを作成</p>
+<p><code>ember g http-proxy &lt;Local Path&gt; &lt;Remote URL&gt;</code></p>
+<p><a href="http://ember-cli.com/extending/" target="_blank" rel="noopener">doc</a></p>
+<p>作成の際に<code>server/index.js</code>の上書きを聞かれるので問題ない場合は<code>y</code>、<br>すでに記述がある場合は上書きしないように気をつける。<br>上書きをしない場合は<code>server/index.js</code>で”proxies”が読み込まれる用にする。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">app</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> globSync   = <span class="built_in">require</span>(<span class="string">'glob'</span>).sync;</span><br><span class="line">  <span class="keyword">var</span> proxies    = globSync(<span class="string">'./proxies/**/*.js'</span>, &#123; <span class="attr">cwd</span>: __dirname &#125;).map(<span class="built_in">require</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Log proxy requests</span></span><br><span class="line">  <span class="keyword">var</span> morgan  = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line">  app.use(morgan(<span class="string">'dev'</span>));</span><br><span class="line"></span><br><span class="line">  proxies.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">route</span>) </span>&#123; route(app); &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="api配下の全てを指定するとき"><a href="#api配下の全てを指定するとき" class="headerlink" title="api配下の全てを指定するとき"></a>api配下の全てを指定するとき</h1><p>例えば<code>http://your-domain/</code>の<code>api/*</code>を利用したい場合などは</p>
+<h2 id="proxyファイル作成"><a href="#proxyファイル作成" class="headerlink" title="proxyファイル作成"></a>proxyファイル作成</h2><p><code>ember g http-proxy api /api</code></p>
+<p>上記のコマンドでapiのproxyファイルが作成される</p>
+<h2 id="server-proxies-api-jsファイル修正"><a href="#server-proxies-api-jsファイル修正" class="headerlink" title="server/proxies/api.jsファイル修正"></a><code>server/proxies/api.js</code>ファイル修正</h2><p>作成した<code>server/proxies/api.js</code>を修正</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> proxyPath = <span class="string">'/api'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">app</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// For options, see:</span></span><br><span class="line">  <span class="comment">// https://github.com/nodejitsu/node-http-proxy</span></span><br><span class="line">  <span class="comment">// 追記</span></span><br><span class="line">  <span class="keyword">var</span> serverUrl = <span class="string">'http://hogeproxy:80'</span>;</span><br><span class="line"></span><br><span class="line">  options = &#123;</span><br><span class="line">    target: serverUrl,</span><br><span class="line">    changeOrigin: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// var proxy= require('http-proxy').createProxyServer(&#123;&#125;);</span></span><br><span class="line">  <span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">'http-proxy'</span>).createProxyServer(options);</span><br><span class="line"></span><br><span class="line">  proxy.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, req</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err, req);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  app.use(proxyPath, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// include root path in proxied request</span></span><br><span class="line">    <span class="comment">// リクエストパスをサーバUrlとローカルパス、リクエストパスに書き換え</span></span><br><span class="line">    req.url = serverUrl + proxyPath + req.url;</span><br><span class="line">    <span class="comment">// proxy.web(req, res, &#123; target: '/api' &#125;);</span></span><br><span class="line">    proxy.web(req, res);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="それでもmockを利用したい場合などは設定値にする"><a href="#それでもmockを利用したい場合などは設定値にする" class="headerlink" title="それでもmockを利用したい場合などは設定値にする"></a>それでもmockを利用したい場合などは設定値にする</h1><p><code>server/index.js</code>を変更し、起動時<code>environment</code>に値を指定する</p>
+<p>ember sever 起動時 <code>ember server --environment=offline</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">app, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> globSync = <span class="built_in">require</span>(<span class="string">'glob'</span>).sync;</span><br><span class="line">  <span class="keyword">var</span> mocks, proxies;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (options.environment === <span class="string">'offline'</span>) &#123;</span><br><span class="line">    mocks = globSync(<span class="string">'./mocks/**/*.js'</span>, &#123;</span><br><span class="line">      cwd: __dirname</span><br><span class="line">    &#125;).map(<span class="built_in">require</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    proxies = globSync(<span class="string">'./proxies/**/*.js'</span>, &#123;</span><br><span class="line">      cwd: __dirname</span><br><span class="line">    &#125;).map(<span class="built_in">require</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Log proxy requests</span></span><br><span class="line">  <span class="keyword">var</span> morgan = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line">  app.use(morgan(<span class="string">'dev'</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (mocks) &#123;</span><br><span class="line">    mocks.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">route</span>) </span>&#123;</span><br><span class="line">      route(app);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (proxies) &#123;</span><br><span class="line">    proxies.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">route</span>) </span>&#123;</span><br><span class="line">      route(app);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://mike1234.com/2015/02/02/ember-cli-easily-toggle-between-mocks-and-live-server/" target="_blank" rel="noopener">参考</a></p>
+<p>※注 proxyファイルの書き方が、何か違うかもしれない。。</p>
+<h1 id="追記"><a href="#追記" class="headerlink" title="追記"></a>追記</h1><p>上記の用に設定しなくても<code>server/index.js</code>でmockを読み込まない用にして、<br>サーバ起動さの際にproxyを指定してあげれば良い。<code>ember sever --proxy &#39;http://your-domain/&#39;</code></p>
+<p><a href="http://www.aymerick.com/2015/03/26/ember-cli-server-upload-directory.html" target="_blank" rel="noopener">参考</a></p>
+<p>いちいちServerに設定するのが面倒な場合は<code>~/.ember-cli</code>に記述もできる</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "liveReload" : true,</span><br><span class="line">  "environment" : "server",</span><br><span class="line">  "proxy" : "http://your-domain"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://ember-cli.com/#runtime-configuration" target="_blank" rel="noopener">doc</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/emberjs/">emberjs</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Memo/">Memo</a><small>7</small></li>
+  
+    <li><a href="/categories/Try/">Try</a><small>2</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Firebase/">Firebase</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/JAWSDAYS2015/">JAWSDAYS2015</a><small>1</small></li>
+  
+    <li><a href="/tags/MIME/">MIME</a><small>1</small></li>
+  
+    <li><a href="/tags/Memo/">Memo</a><small>1</small></li>
+  
+    <li><a href="/tags/emberjs/">emberjs</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/remotework/">remotework</a><small>1</small></li>
+  
+    <li><a href="/tags/ruby/">ruby</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/Firebase/" style="font-size: 10px;">Firebase</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JAWSDAYS2015/" style="font-size: 10px;">JAWSDAYS2015</a> <a href="/tags/MIME/" style="font-size: 10px;">MIME</a> <a href="/tags/Memo/" style="font-size: 10px;">Memo</a> <a href="/tags/emberjs/" style="font-size: 15px;">emberjs</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/remotework/" style="font-size: 10px;">remotework</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 Hiroki Hatsushika
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'stayrad';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

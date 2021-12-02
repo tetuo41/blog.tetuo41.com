@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>tmail | Stay Rad</title>
+  <meta name="author" content="Hiroki Hatsushika">
+  
+  <meta name="description" content="123456789101112131415161718192021222324252627282930def mail_data(mFile)  file = File.open(mFile).read  mail = TMail::Mail.parse(file)  #p mail.to # 送信">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="tmail"/>
+  <meta property="og:site_name" content="Stay Rad"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="atom.xml" title="Stay Rad" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-40597557-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Stay Rad</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/AboutMe">AboutMe</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-03T07:56:43.000Z"><a href="/2013/07/03/tmail/">2013-07-03</a></time>
+      
+      
+  
+    <h1 class="title">tmail</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mail_data</span><span class="params">(mFile)</span></span></span><br><span class="line">  file = File.open(mFile).read</span><br><span class="line">  mail = TMail::Mail.parse(file)</span><br><span class="line">  <span class="comment">#p mail.to # 送信先</span></span><br><span class="line">  <span class="comment">#p mail.from # 送信元</span></span><br><span class="line">  idx = <span class="number">1</span> <span class="comment"># ファイル名</span></span><br><span class="line">  mail.parts.each <span class="keyword">do</span> <span class="params">|m|</span></span><br><span class="line">    <span class="keyword">if</span> <span class="literal">nil</span> != m[<span class="string">'content-disposition'</span>]</span><br><span class="line">    m.base64_decode</span><br><span class="line">    attach_fileNm = m[<span class="string">'content-disposition'</span>][<span class="string">'filename'</span>]</span><br><span class="line">    <span class="comment">#File.open("#&#123;CLIENTDATAPATH&#125;/#&#123;attach_fileNm&#125;.#&#123;ext(m)&#125;", 'w') do |f|</span></span><br><span class="line">    File.open(<span class="string">"<span class="subst">#&#123;CLIENTDATAPATH&#125;</span>/<span class="subst">#&#123;attach_fileNm&#125;</span>"</span>, <span class="string">'w'</span>) <span class="keyword">do</span> <span class="params">|f|</span></span><br><span class="line">      f.write m.body</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  idx += <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">CTYPE_TO_EXT = &#123;</span><br><span class="line"><span class="string">'image/jpeg'</span> =&gt; <span class="string">'jpg'</span>,</span><br><span class="line"><span class="string">'image/gif'</span> =&gt; <span class="string">'gif'</span>,</span><br><span class="line"><span class="string">'image/png'</span> =&gt; <span class="string">'png'</span>,</span><br><span class="line"><span class="string">'image/tiff'</span> =&gt; <span class="string">'tiff'</span>,</span><br><span class="line"><span class="string">'text/plain'</span> =&gt; <span class="string">'txt'</span>,</span><br><span class="line"><span class="string">'application/vnd.ms-excel'</span> =&gt; <span class="string">'csv'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ext</span><span class="params">( mail )</span></span></span><br><span class="line">  CTYPE_TO_EXT[mail.content_type] <span class="params">||</span> <span class="string">'txt'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Thanks for the link.<br><a href="http://ecpplus.net/weblog/ruby%E3%81%A7%E5%8F%97%E4%BF%A1%E3%83%A1%E3%83%BC%E3%83%AB%E8%A7%A3%E6%9E%90/" target="_blank" rel="noopener">ここ</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Memo/">Memo</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/ruby/">ruby</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Memo/">Memo</a><small>7</small></li>
+  
+    <li><a href="/categories/Try/">Try</a><small>2</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Firebase/">Firebase</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/JAWSDAYS2015/">JAWSDAYS2015</a><small>1</small></li>
+  
+    <li><a href="/tags/MIME/">MIME</a><small>1</small></li>
+  
+    <li><a href="/tags/Memo/">Memo</a><small>1</small></li>
+  
+    <li><a href="/tags/emberjs/">emberjs</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/remotework/">remotework</a><small>1</small></li>
+  
+    <li><a href="/tags/ruby/">ruby</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/Firebase/" style="font-size: 10px;">Firebase</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JAWSDAYS2015/" style="font-size: 10px;">JAWSDAYS2015</a> <a href="/tags/MIME/" style="font-size: 10px;">MIME</a> <a href="/tags/Memo/" style="font-size: 10px;">Memo</a> <a href="/tags/emberjs/" style="font-size: 15px;">emberjs</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/remotework/" style="font-size: 10px;">remotework</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 Hiroki Hatsushika
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'stayrad';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
